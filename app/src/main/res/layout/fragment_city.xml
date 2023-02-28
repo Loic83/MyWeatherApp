@@ -5,10 +5,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.city.CityFragment">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="FragmentRecycler view "></TextView>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/cities_recycler_view"
         android:layout_width="match_parent"

@@ -1,4 +1,4 @@
-package com.example.myweatherapp.domain.model
+package com.example.api.model
 
 data class Weather(val description: String,
                    val temperature: Float,

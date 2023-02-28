@@ -9,6 +9,4 @@ interface CityRepository {
 
     suspend fun insertCity(city: City)
 
-    suspend fun deleteCity(id: Long)
-
 }

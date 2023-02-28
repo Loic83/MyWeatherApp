@@ -17,8 +17,4 @@ class CityRepositoryImpl (
         return dao.insertCity(city)
     }
 
-    override suspend fun deleteCity(id: Long) {
-        return dao.deleteCity(id)
-    }
-
 }

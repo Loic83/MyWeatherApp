@@ -1,8 +1,13 @@
 package com.example.myweatherapp.ui.city
 
+import android.content.Context
+import android.content.Intent
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
@@ -10,6 +15,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myweatherapp.R
 import com.example.myweatherapp.domain.model.City
+import com.example.myweatherapp.ui.weather.WeatherActivity
+import com.example.myweatherapp.ui.weather.WeatherFragment.Companion.EXTRA_CITY_NAME
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -48,16 +55,19 @@ class CityFragment : Fragment() , CityAdapter.CityItemListener{
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         recyclerView.adapter = adapter
-        viewModel = ViewModelProvider(this).get(CityViewModel::class.java)
+        viewModel = ViewModelProvider(this)[CityViewModel::class.java]
         updateViewModelCities()
     }
 
     override fun onCitySelected(city: City) {
-        TODO("Not yet implemented")
-    }
+        if (checkForInternet(context)) {
+            val intent = Intent(context, WeatherActivity::class.java)
+            intent.putExtra(EXTRA_CITY_NAME,""+city.name)
+            context?.startActivity(intent)
+        } else {
+            Toast.makeText(context, getString(R.string.no_connection), Toast.LENGTH_SHORT).show()
+        }
 
-    override fun onCityDeleted(city: City) {
-        TODO("Not yet implemented")
     }
 
     private fun updateViewModelCities() {
@@ -71,6 +81,23 @@ class CityFragment : Fragment() , CityAdapter.CityItemListener{
         cities.clear()
         cities.addAll(newCities)
         adapter.notifyDataSetChanged()
+    }
+
+    private fun checkForInternet(context: Context?): Boolean {
+
+        val connectivityManager = context?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
+        val network = connectivityManager.activeNetwork ?: return false
+
+        val activeNetwork = connectivityManager.getNetworkCapabilities(network) ?: return false
+
+        return when {
+            activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
+
+            activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+
+            else -> false
+        }
     }
 
 }

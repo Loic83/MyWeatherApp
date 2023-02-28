@@ -15,12 +15,6 @@ class CityViewModel @Inject constructor(
 
     val cities = cityUseCases.getCities
 
-    fun deleteCity (id : Long) {
-        viewModelScope.launch {
-            cityUseCases.deleteCity(id)
-        }
-    }
-
     fun insertCity (city : City) {
         viewModelScope.launch {
             cityUseCases.insertCity(city)

@@ -4,4 +4,12 @@
     <string name="menu_create_city">Ajouter une ville</string>
     <string name="choose_name_city">Veuillez saisir le nom de la ville</string>
     <string name="validate">Valider</string>
+    <string name="weather_temperature_label">Temperature:</string>
+    <string name="weather_humidity_label">Humidité:</string>
+    <string name="weather_pressure_label">Pression:</string>
+    <string name="weather_temperature_value">%1$d °C</string>
+    <string name="weather_humidity_value">%1$d %%</string>
+    <string name="weather_pressure_value">%1$s hPa</string>
+    <string name="weather_message_error_could_not_load_weather">Echec du chargement des données</string>
+    <string name="no_connection">Veuillez vérifier votre connexion internet</string>
 </resources>

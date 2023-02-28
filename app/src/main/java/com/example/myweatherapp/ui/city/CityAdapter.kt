@@ -16,13 +16,11 @@ class CityAdapter(private val cities: List<City>,
 
     interface CityItemListener {
         fun onCitySelected(city: City)
-        fun onCityDeleted(city: City)
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val cardView = itemView.findViewById<CardView>(R.id.card_view)!!
         val cityNameView = itemView.findViewById<TextView>(R.id.name)!!
-        val deleteView = itemView.findViewById<View>(R.id.delete)!!
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -37,8 +35,6 @@ class CityAdapter(private val cities: List<City>,
             cardView.setOnClickListener(this@CityAdapter)
             cardView.tag = city
             cityNameView.text = city.name
-            deleteView.tag = city
-            deleteView.setOnClickListener(this@CityAdapter)
         }
     }
 
@@ -47,7 +43,6 @@ class CityAdapter(private val cities: List<City>,
     override fun onClick(v: View) {
         when (v.id) {
             R.id.card_view -> cityListener.onCitySelected(v.tag as City)
-            R.id.delete -> cityListener.onCityDeleted(v.tag as City)
         }
     }
 }
