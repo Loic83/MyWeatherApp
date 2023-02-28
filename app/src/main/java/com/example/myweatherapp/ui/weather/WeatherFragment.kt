@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.example.myweatherapp.R
 import com.example.api.model.Weather
@@ -75,7 +76,7 @@ class WeatherFragment : Fragment() {
         temperature.text = weather.temperature.toString()
         humidity.text = weather.humidity.toString()
         pressure.text = weather.pressure.toString()
-        //weatherIcon = weather.icon.toString()
+        weatherIcon.background = context?.let { ContextCompat.getDrawable(it,resources.getIdentifier("ic_"+weather.icon.toString(), "drawable", context?.getPackageName())) }
     }
 
 }
