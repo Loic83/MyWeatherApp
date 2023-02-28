@@ -9,5 +9,6 @@ import dagger.hilt.components.SingletonComponent
 @Module
 @InstallIn(SingletonComponent::class)
 class ApiServiceModule {
-
+    @Provides
+    fun provideOpenWeatherService() = OpenWeatherApi().openWeatherService
 }
