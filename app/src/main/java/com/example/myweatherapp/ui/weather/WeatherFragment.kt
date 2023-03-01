@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.example.myweatherapp.R
@@ -63,11 +64,12 @@ class WeatherFragment : Fragment() {
         viewModel = ViewModelProvider(this)[WeatherViewModel::class.java]
 
         lifecycleScope.launch {
-            if (cityName != null) {
+            if (cityName != null && viewModel.checkWeatherisEmpty(viewModel.weather.invoke(cityName))) {
                 showDetailWeather(viewModel.weather.invoke(cityName))
+            } else {
+                Toast.makeText(context,getString(R.string.weather_message_error_could_not_load_weather),Toast.LENGTH_SHORT).show()
             }
         }
-
     }
 
     private fun showDetailWeather(weather : Weather) {
