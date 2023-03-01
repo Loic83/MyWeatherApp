@@ -11,7 +11,6 @@
         tools:ignore="MissingConstraints">
 
         <RelativeLayout
-            xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -20,13 +19,13 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_margin="10dp"
-                android:src="@drawable/ic_place" />
+                android:src="@drawable/ic_place"
+                android:contentDescription="@string/icon" />
 
             <TextView
                 android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/icon"
                 android:layout_toEndOf="@id/icon"
                 android:layout_centerVertical="true"
                 android:textSize="20sp"

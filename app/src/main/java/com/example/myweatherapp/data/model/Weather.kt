@@ -1,4 +1,4 @@
-package com.example.api.model
+package com.example.myweatherapp.data.model
 
 data class Weather(val description: String,
                    val temperature: Float,

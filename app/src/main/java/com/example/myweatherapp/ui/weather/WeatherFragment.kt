@@ -13,16 +13,16 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.example.myweatherapp.R
-import com.example.api.model.Weather
+import com.example.myweatherapp.data.model.Weather
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+
+const val EXTRA_CITY_NAME = "com.example.myweatherapp.ui.weather.EXTRA_CITY_NAME"
 
 @AndroidEntryPoint
 class WeatherFragment : Fragment() {
 
     companion object {
-        val EXTRA_CITY_NAME = "com.example.myweatherapp.ui.weather.EXTRA_CITY_NAME"
-
         fun newInstance() = WeatherFragment()
     }
 
@@ -58,13 +58,13 @@ class WeatherFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         if (activity?.intent!!.hasExtra(EXTRA_CITY_NAME)) {
-            cityName = activity?.intent!!.getStringExtra(EXTRA_CITY_NAME).toString()
+            cityName = activity?.intent!!.getStringExtra(EXTRA_CITY_NAME)!!
         }
 
         viewModel = ViewModelProvider(this)[WeatherViewModel::class.java]
 
         lifecycleScope.launch {
-            if (cityName != null && viewModel.checkWeatherisEmpty(viewModel.weather.invoke(cityName))) {
+            if (viewModel.isWeatherNotEmpty(viewModel.weather.invoke(cityName))) {
                 showDetailWeather(viewModel.weather.invoke(cityName))
             } else {
                 Toast.makeText(context,getString(R.string.weather_message_error_could_not_load_weather),Toast.LENGTH_SHORT).show()
@@ -72,13 +72,14 @@ class WeatherFragment : Fragment() {
         }
     }
 
+    @SuppressLint("DiscouragedApi")
     private fun showDetailWeather(weather : Weather) {
         city.text = cityName
         weatherDescription.text = weather.description
         temperature.text = weather.temperature.toString()
         humidity.text = weather.humidity.toString()
         pressure.text = weather.pressure.toString()
-        weatherIcon.background = context?.let { ContextCompat.getDrawable(it,resources.getIdentifier("ic_"+weather.icon.toString(), "drawable", context?.getPackageName())) }
+        weatherIcon.background = context?.let { ContextCompat.getDrawable(it,resources.getIdentifier("ic_"+weather.icon, "drawable", it.packageName)) }
     }
 
 }

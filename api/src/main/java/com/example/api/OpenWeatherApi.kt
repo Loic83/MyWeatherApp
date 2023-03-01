@@ -6,13 +6,13 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class OpenWeatherApi {
 
-    private val BASE_URL: String = "https://api.openweathermap.org/data/2.5/"
+    private val urlApi: String = "https://api.openweathermap.org/data/2.5/"
 
     val openWeatherService: OpenWeatherService
 
     init {
         val retrofit = Retrofit.Builder()
-            .baseUrl(BASE_URL)
+            .baseUrl(urlApi)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 

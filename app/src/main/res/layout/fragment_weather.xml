@@ -11,7 +11,6 @@
         android:id="@+id/city"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -29,13 +28,13 @@
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintLeft_toLeftOf="@id/city"
         app:layout_constraintTop_toBottomOf="@id/city"
-        tools:src="@mipmap/ic_launcher" />
+        tools:src="@mipmap/ic_launcher"
+        android:contentDescription="@string/weather_icon" />
 
     <TextView
         android:id="@+id/weather_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
         android:layout_marginStart="30dp"
         app:layout_constraintLeft_toRightOf="@id/weather_icon"
         app:layout_constraintTop_toTopOf="@id/weather_icon"

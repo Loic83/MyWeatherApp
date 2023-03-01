@@ -1,7 +1,6 @@
 package com.example.api.service
 
-import com.example.api.model.WeatherWrapper
-import retrofit2.Call
+import com.example.api.model.WeatherWrapperDTO
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -12,6 +11,6 @@ interface OpenWeatherService {
 
     @GET("weather?units=metric&lang=fr")
     suspend fun getWeather(@Query("q") cityName: String,
-                   @Query("appid") apiKey: String = API_KEY) : Response<WeatherWrapper>
+                   @Query("appid") apiKey: String = API_KEY) : Response<WeatherWrapperDTO>
 
 }

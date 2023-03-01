@@ -1,5 +1,6 @@
 package com.example.myweatherapp.ui.city
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
@@ -15,23 +16,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myweatherapp.R
 import com.example.myweatherapp.domain.model.City
+import com.example.myweatherapp.ui.weather.EXTRA_CITY_NAME
 import com.example.myweatherapp.ui.weather.WeatherActivity
-import com.example.myweatherapp.ui.weather.WeatherFragment.Companion.EXTRA_CITY_NAME
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class CityFragment : Fragment() , CityAdapter.CityItemListener{
-
-    companion object {
-        fun newInstance() = CityFragment()
-    }
-
-    interface CityFragmentListener {
-        fun onCitySelected(city: City)
-    }
-
-    var listener: CityFragmentListener? = null
 
     private lateinit var cities: MutableList<City>
     private lateinit var recyclerView: RecyclerView
@@ -77,6 +68,7 @@ class CityFragment : Fragment() , CityAdapter.CityItemListener{
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun updateCities(newCities: List<City>) {
         cities.clear()
         cities.addAll(newCities)

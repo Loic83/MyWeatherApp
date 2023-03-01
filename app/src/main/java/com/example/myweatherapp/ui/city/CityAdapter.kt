@@ -10,7 +10,7 @@ import com.example.myweatherapp.R
 import com.example.myweatherapp.domain.model.City
 
 class CityAdapter(private val cities: List<City>,
-                  private val cityListener: CityAdapter.CityItemListener
+                  private val cityListener: CityItemListener
 )
     : RecyclerView.Adapter<CityAdapter.ViewHolder>(), View.OnClickListener {
 
